@@ -5,13 +5,13 @@ const PersonalDetailSchema = new mongoose.Schema({
     middleName: String,
     lastName: String,
     dateOfBirth: Date,
-    _id : false
+    _id: false
 });
 
 const SocialMediaSchema = new mongoose.Schema({
     type: String,
     url: String,
-    _id : false
+    _id: false
 })
 
 const EducationalDetailSchema = new mongoose.Schema({
@@ -19,7 +19,7 @@ const EducationalDetailSchema = new mongoose.Schema({
     description: String,
     markingSystem: String,
     markes: String,
-    _id : false
+    _id: false
 })
 
 const JobRole = new mongoose.Schema({
@@ -28,7 +28,7 @@ const JobRole = new mongoose.Schema({
     startTime: Date,
     stillWorking: Boolean,
     endTime: Date,
-    _id : false
+    _id: false
 })
 
 const WorkExperienceSchema = new mongoose.Schema({
@@ -37,7 +37,7 @@ const WorkExperienceSchema = new mongoose.Schema({
     startTime: Date,
     endTime: Date,
     roles: [JobRole],
-    _id : false
+    _id: false
 })
 
 const UserSchema = new mongoose.Schema({
@@ -52,13 +52,13 @@ const UserSchema = new mongoose.Schema({
     },
     mobileNumber: String,
     role: [{ type: String, required: true }],
-    googleObj: { type: Object },
     personalDetails: [PersonalDetailSchema],
     aboutMe: String,
     webSiteLink: String,
     socialMedia: [SocialMediaSchema],
     educationalDetails: [EducationalDetailSchema],
     workExperiences: [WorkExperienceSchema]
-})
+
+}, { versionKey: false })
 
 module.exports = mongoose.model('User', UserSchema);

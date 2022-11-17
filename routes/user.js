@@ -2,19 +2,12 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
 
-router.get('/', async (req, res) => {
-    try {
-        const user = await User.find();
-        res.json(user);
-    } catch (error) {
-        res.send('Error ' + error);
-    }
-})
+const userController = require('../controllers/user.js');
 
-router.post('/', async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
-        console.log('Here');
-        // console.log(req.body);
+        let email = req.body.email;
+        let password = req.body.password;
         await User.insertMany([req.body]);
         res.json(req.body);
     } catch (error) {
@@ -23,4 +16,20 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.post('/signup', async (req, res) => {
+    try {
+        let email = req.body.email;
+        let password = req.body.password;
+        await User.insertMany([req.body]);
+        res.json(req.body);
+    } catch (error) {
+        console.log(error);
+        res.send('Error ' + error);
+    }
+})
+
+router.post('/', userController.saveUserDetails);
+router.get('/', userController.getAllUser);
+router.get('/:id', userController.getUserById);
+router.put('/:id', userController.updateUserById);
 module.exports = router;
