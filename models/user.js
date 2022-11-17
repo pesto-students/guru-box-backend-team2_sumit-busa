@@ -3,52 +3,62 @@ const mongoose = require('mongoose');
 const PersonalDetailSchema = new mongoose.Schema({
     firstName: String,
     middleName: String,
-    lastName: String
+    lastName: String,
+    dateOfBirth: Date,
+    _id : false
 });
 
 const SocialMediaSchema = new mongoose.Schema({
     type: String,
-    url: String
+    url: String,
+    _id : false
 })
 
 const EducationalDetailSchema = new mongoose.Schema({
     title: String,
     description: String,
     markingSystem: String,
-    markes: String
+    markes: String,
+    _id : false
 })
 
 const JobRole = new mongoose.Schema({
     title: String,
     description: String,
-    startTime: String,
+    startTime: Date,
     stillWorking: Boolean,
-    endTime: String
+    endTime: Date,
+    _id : false
 })
 
 const WorkExperienceSchema = new mongoose.Schema({
     organisation: String,
     stillWorking: Boolean,
-    startTime: String,
-    endTime: String,
-    roles: [JobRole]
+    startTime: Date,
+    endTime: Date,
+    roles: [JobRole],
+    _id : false
 })
 
 const UserSchema = new mongoose.Schema({
     email: {
         type: String,
-        require: true
+        require: true,
+        unique: true
     },
     password: {
         type: String,
         require: true
     },
     mobileNumber: String,
+    role: [{ type: String, required: true }],
+    googleObj: { type: Object },
     personalDetails: [PersonalDetailSchema],
     aboutMe: String,
     webSiteLink: String,
     socialMedia: [SocialMediaSchema],
-    educationalDetails: [EducationalDetailSchema]
+    educationalDetails: [EducationalDetailSchema],
+    workExperiences: [WorkExperienceSchema]
 })
 
 module.exports = mongoose.model('User', UserSchema);
