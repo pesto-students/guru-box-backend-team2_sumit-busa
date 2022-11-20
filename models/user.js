@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
         require: true
     },
     mobileNumber: String,
-    role: [{ type: String, required: true }],
+    role: { type: String, required: true },
     personalDetails: [PersonalDetailSchema],
     aboutMe: String,
     webSiteLink: String,
