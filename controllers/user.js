@@ -39,12 +39,17 @@ function getUserById(req, res) {
     })
 }
 
-function updateUserById(req, res) {
+function updateUserData(req, res) {
+    if (req.user == null) {
+        res.sendStatus(401);
+        return;
+    }
     const b = req.body;
+    const userId = req.user._id;
     if(!b) {
         res.status(400).send("Request Body not found");
     }
-    User.findById(req.params.id).then((user) => {
+    User.findById(userId).then((user) => {
         if (!user) {
             throw new Error('User not found');
         }
@@ -66,4 +71,4 @@ function updateUserById(req, res) {
     })
 }
 
-module.exports = { saveUserDetails, getAllUser, getUserById, updateUserById }
+module.exports = { saveUserDetails, getAllUser, getUserById, updateUserData }

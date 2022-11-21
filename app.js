@@ -32,7 +32,7 @@ function authenticateUser(req, res, next) {
         req.user = null;
         next();
     } else {
-        jwt.verify(token, SECRET, (err, user) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
                 req.user = null;
                 console.log('Wrong Access token');
