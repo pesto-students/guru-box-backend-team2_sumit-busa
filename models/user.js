@@ -50,9 +50,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    refreshTokens : [String],
     mobileNumber: String,
     role: { type: String, required: true },
-    personalDetails: [PersonalDetailSchema],
+    personalDetails: PersonalDetailSchema,
     aboutMe: String,
     webSiteLink: String,
     socialMedia: [SocialMediaSchema],
