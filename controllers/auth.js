@@ -67,10 +67,10 @@ function refresh(req, res) {
     };
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if(err) return res.sendStatus(401);
+        if (err) return res.sendStatus(401);
         console.log(user);
         const accessToken = generatAccessToken(user);
-        res.json({accessToken: accessToken});
+        res.json({ accessToken: accessToken });
     })
 
     async function removeRefreshTokenFromUser(id, refreshToken) {
@@ -89,14 +89,14 @@ function logout(req, res) {
     };
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if(err) return res.sendStatus(401);
+        if (err) return res.sendStatus(401);
         console.log(user);
         User.exists({ _id: new ObjectId(user._id), refreshTokens: refreshToken }).then((user) => {
             if (!user) {
                 res.sendStatus(401);
                 return false;
             } else {
-                removeRefreshTokenFromUser(user._id+"", refreshToken);
+                removeRefreshTokenFromUser(user._id + "", refreshToken);
                 res.sendStatus(200);
                 return true;
             }
@@ -121,7 +121,7 @@ function generatTokens(user) {
     const accessToken = generatAccessToken(user);
     const refreshToken = generatRefreshToken(user);
     mapRefreshTokenToUser(user._id + "", refreshToken);
-    return{
+    return {
         "accessToken": accessToken,
         "refreshToken": refreshToken
     };
@@ -130,6 +130,5 @@ function generatTokens(user) {
 async function removeRefreshTokenFromUser(id, refreshToken) {
     await User.updateOne({ _id: new ObjectId(id) }, { $pull: { refreshTokens: refreshToken } });
 }
-
 
 module.exports = { login, signup, refresh, logout };
