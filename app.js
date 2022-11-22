@@ -1,10 +1,10 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const url = 'mongodb://chacha:chacha1998@localhost:27017/venus';
-const PORT = process.env.PORT || '9000';
+const url = process.env.MONGO_URL;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -39,7 +39,6 @@ function authenticateUser(req, res, next) {
                 next();
             } else {
                 req.user = user;
-                console.log(user);
                 next();
             }
         })
