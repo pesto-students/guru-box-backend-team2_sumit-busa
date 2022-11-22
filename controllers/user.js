@@ -55,7 +55,6 @@ function updateUserData(req, res) {
         }
         return user;
     }).then((user) => {
-        user.email =  b.email;
         user.mobileNumber = b.mobileNumber;
         user.personalDetails = b.personalDetails;
         user.aboutMe = b.aboutMe;;
@@ -63,7 +62,7 @@ function updateUserData(req, res) {
         user.socialMedia = b.socialMedia;
         user.educationalDetails = b.educationalDetails;
         user.workExperiences = b.workExperiences;
-        return user.save();
+        user.save();
     }).then(()=>{
         res.send('Success');
     }).catch((err) => {

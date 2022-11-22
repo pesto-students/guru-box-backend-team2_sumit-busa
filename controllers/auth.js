@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb');
 const User = require('../models/user.js');
 
 const DEFAULT_ROLE = "user";
+const MENTOR_ROLE = "mentor";
 
 function login(req, res) {
     if (!req.body) res.sendStatus(400);
@@ -27,8 +28,12 @@ function login(req, res) {
 
 function signup(req, res) {
     if (!req.body) { res.sendStatus(400); return; };
-    const { email, password, firstName, middleName, lastName } = req.body;
-    if (email == null || password == null || firstName == null || lastName == null) {
+    const { email, password, firstName, middleName, lastName, role } = req.body;
+    if (email == null || password == null || firstName == null || lastName == null || role == null) {
+        res.sendStatus(400);
+        return;
+    };
+    if (role !== DEFAULT_ROLE && role !== MENTOR_ROLE) {
         res.sendStatus(400);
         return;
     };
@@ -45,7 +50,7 @@ function signup(req, res) {
                 middleName: middleName,
                 lastName: lastName
             },
-            role: DEFAULT_ROLE
+            role: role
         });
         user.save().then((user) => {
             res.json(generatTokens(user));

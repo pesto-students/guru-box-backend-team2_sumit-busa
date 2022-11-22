@@ -15,6 +15,7 @@ const SocialMediaSchema = new mongoose.Schema({
 })
 
 const EducationalDetailSchema = new mongoose.Schema({
+    type: String,
     title: String,
     description: String,
     markingSystem: String,
@@ -50,7 +51,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    refreshTokens : [String],
+    refreshTokens: [String],
     mobileNumber: String,
     role: { type: String, required: true },
     personalDetails: PersonalDetailSchema,
