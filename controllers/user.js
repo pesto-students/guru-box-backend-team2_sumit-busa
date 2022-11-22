@@ -39,6 +39,17 @@ function getUserById(req, res) {
     })
 }
 
+function getUserDetail(req, res) {
+    const userId = req.user._id;
+    console.log("getUserDetail");
+    console.log(userId);
+    User.findById(userId).select({ password: 0, refreshTokens : 0 }).then((user) => {
+        res.json(user);
+    }).catch((err) => {
+        res.status(500).send({ message: err.message || "Error while fetching Data" });
+    })
+}
+
 function updateUserData(req, res) {
     if (req.user == null) {
         res.sendStatus(401);
@@ -46,7 +57,7 @@ function updateUserData(req, res) {
     }
     const b = req.body;
     const userId = req.user._id;
-    if(!b) {
+    if (!b) {
         res.status(400).send("Request Body not found");
     }
     User.findById(userId).then((user) => {
@@ -63,11 +74,11 @@ function updateUserData(req, res) {
         user.educationalDetails = b.educationalDetails;
         user.workExperiences = b.workExperiences;
         user.save();
-    }).then(()=>{
+    }).then(() => {
         res.send('Success');
     }).catch((err) => {
         res.status(500).send({ message: err.message || "Error while updating User" });
     })
 }
 
-module.exports = { saveUserDetails, getAllUser, getUserById, updateUserData }
+module.exports = { saveUserDetails, getAllUser, getUserById, updateUserData, getUserDetail };
