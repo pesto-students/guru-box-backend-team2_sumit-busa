@@ -7,9 +7,7 @@ const { signInRequired, onlyMentor, onlyUser } = require('../permissions/permiss
 router.put('/', signInRequired, onlyMentor, userController.updateUserData);
 router.get('/', signInRequired, userController.getUserDetail);
 router.get('/industries', userController.getIndustries);
-
-// router.post('/', userController.saveUserDetails);
-// router.get('/', signInRequired, userController.getAllUser);
-// router.get('/:id', userController.getUserById);
+router.get('/mentors', userController.getGetMentorsByIndustry);
+router.get('/:id', signInRequired, userController.getUserById);
 
 module.exports = router;

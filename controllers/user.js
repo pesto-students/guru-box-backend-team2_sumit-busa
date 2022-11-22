@@ -1,5 +1,8 @@
 const User = require('../models/user.js');
 
+const MENTOR_ROLE = "mentor";
+const DEFAULT_ROLE = "user";
+
 function saveUserDetails(req, res) {
     if (!req.body) {
         res.status(400).send("Enter Body");
@@ -32,7 +35,13 @@ function getAllUser(req, res) {
 }
 
 function getUserById(req, res) {
-    User.findById(req.params.id).select({ password: 0 }).then((user) => {
+    User.findById(req.params.id).select({
+        email: 0,
+        password: 0,
+        refreshTokens: 0,
+        role: 0,
+        mobileNumber: 0
+    }).then((user) => {
         res.send(user);
     }).catch((err) => {
         res.status(500).send({ message: err.message || "Error while fetching Data" });
@@ -43,7 +52,7 @@ function getUserDetail(req, res) {
     const userId = req.user._id;
     console.log("getUserDetail");
     console.log(userId);
-    User.findById(userId).select({ password: 0, refreshTokens : 0 }).then((user) => {
+    User.findById(userId).select({ password: 0, refreshTokens: 0 }).then((user) => {
         res.json(user);
     }).catch((err) => {
         res.status(500).send({ message: err.message || "Error while fetching Data" });
@@ -84,11 +93,40 @@ function updateUserData(req, res) {
 
 function getIndustries(req, res) {
     User.distinct('industry').then((industrires) => {
-        console.log(industrires);
         res.send(industrires);
     }).catch((err) => {
         res.sendStatus(500);
     })
 }
 
-module.exports = { saveUserDetails, getAllUser, getUserById, updateUserData, getUserDetail, getIndustries };
+function getGetMentorsByIndustry(req, res) {
+    const industry = req.query.industry;
+    if (!industry) {
+        res.status(400).send('Send industry in query param')
+    }
+    User.find({ industry: industry, role: MENTOR_ROLE }).select({
+        email: 0,
+        password: 0,
+        refreshTokens: 0,
+        role: 0,
+        mobileNumber: 0,
+        socialMedia: 0,
+        educationalDetails: 0,
+        workExperiences: 0,
+        webSiteLink: 0
+    })
+        .then((mentors) => {
+            console.log(mentors);
+            res.send(mentors);
+        }).catch((err) => {
+            res.sendStatus(500);
+        })
+}
+
+module.exports = {
+    getUserById,
+    updateUserData,
+    getUserDetail,
+    getIndustries,
+    getGetMentorsByIndustry
+};
