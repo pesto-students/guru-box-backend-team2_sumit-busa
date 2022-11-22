@@ -51,6 +51,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    industry: String,
     refreshTokens: [String],
     mobileNumber: String,
     role: { type: String, required: true },

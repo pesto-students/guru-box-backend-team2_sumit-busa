@@ -73,6 +73,7 @@ function updateUserData(req, res) {
         user.socialMedia = b.socialMedia;
         user.educationalDetails = b.educationalDetails;
         user.workExperiences = b.workExperiences;
+        user.industry = b.industry;
         user.save();
     }).then(() => {
         res.send('Success');
@@ -81,4 +82,13 @@ function updateUserData(req, res) {
     })
 }
 
-module.exports = { saveUserDetails, getAllUser, getUserById, updateUserData, getUserDetail };
+function getIndustries(req, res) {
+    User.distinct('industry').then((industrires) => {
+        console.log(industrires);
+        res.send(industrires);
+    }).catch((err) => {
+        res.sendStatus(500);
+    })
+}
+
+module.exports = { saveUserDetails, getAllUser, getUserById, updateUserData, getUserDetail, getIndustries };
