@@ -21,9 +21,11 @@ app.use(authenticateUser);
 
 const userRoutes = require('./routes/user');
 const authRoutes = require('./routes/auth');
+const programRoutes = require('./routes/program');
 
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/programs', programRoutes);
 
 function authenticateUser(req, res, next) {
     const authHeader = req.headers['authorization'];

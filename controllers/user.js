@@ -116,7 +116,6 @@ function getGetMentorsByIndustry(req, res) {
         webSiteLink: 0
     })
         .then((mentors) => {
-            console.log(mentors);
             res.send(mentors);
         }).catch((err) => {
             res.sendStatus(500);
