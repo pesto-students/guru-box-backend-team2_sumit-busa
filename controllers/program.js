@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const Program = require('../models/pragram');
 
 function createProgram(req, res) {
@@ -29,7 +30,17 @@ function getProgramsByMentor(req, res) {
     })
 }
 
+function deleteProgramById(req, res) {
+    const programId = req.params.programId;
+    Program.deleteOne({_id : new ObjectId(programId), mentorId : req.user._id}).then(() => {
+        res.sendStatus(200);
+    }).catch((err) => {
+        res.status(500).send(err);
+    })
+}
+
 module.exports = {
     createProgram,
-    getProgramsByMentor
+    getProgramsByMentor,
+    deleteProgramById
 }
