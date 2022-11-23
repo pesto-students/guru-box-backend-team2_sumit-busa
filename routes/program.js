@@ -7,5 +7,6 @@ const { signInRequired, onlyMentor, onlyUser } = require('../permissions/permiss
 router.post('/', signInRequired, onlyMentor, programContoller.createProgram);
 router.get('/:mentorId', signInRequired, programContoller.getProgramsByMentor);
 router.delete('/:programId', signInRequired, onlyMentor, programContoller.deleteProgramById);
+router.put('/:programId', signInRequired, onlyMentor, programContoller.updateProgramById);
 
 module.exports = router;
