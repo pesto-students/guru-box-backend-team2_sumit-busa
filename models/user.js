@@ -62,6 +62,6 @@ const UserSchema = new mongoose.Schema({
     educationalDetails: [EducationalDetailSchema],
     workExperiences: [WorkExperienceSchema]
 
-}, { versionKey: false })
+}, { versionKey: false });
 
 module.exports = mongoose.model('User', UserSchema);
