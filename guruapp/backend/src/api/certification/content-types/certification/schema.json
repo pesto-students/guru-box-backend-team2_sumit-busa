@@ -1,0 +1,33 @@
+{
+    "kind": "collectionType",
+    "collectionName": "certifications",
+    "info": {
+      "singularName": "certification",
+      "pluralName": "certifications",
+      "displayName": "Certification",
+      "description": ""
+    },
+    "options": {
+      "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+      "member": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::member.member",
+        "inversedBy": "certifications"
+      },
+      "best_match": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::best-match.best-match",
+        "inversedBy": "certifications"
+      },
+      "name": {
+        "type": "string",
+        "required": true,
+        "unique": true
+      }
+    }
+  }

@@ -1,0 +1,109 @@
+{
+    "kind": "collectionType",
+    "collectionName": "members",
+    "info": {
+      "singularName": "member",
+      "pluralName": "members",
+      "displayName": "Member",
+      "description": ""
+    },
+    "options": {
+      "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+      "firstName": {
+        "type": "string",
+        "required": true
+      },
+      "type": {
+        "type": "enumeration",
+        "enum": [
+          "mentor",
+          "mentee"
+        ],
+        "required": true
+      },
+      "phoneNumber": {
+        "type": "string",
+        "required": false
+      },
+      "gender": {
+        "type": "enumeration",
+        "enum": [
+          "woman",
+          "man",
+          "anotherGender"
+        ],
+        "required": true
+      },
+      "companyName": {
+        "type": "string",
+        "required": false
+      },
+      "jobTitle": {
+        "type": "string",
+        "required": false
+      },
+      "timeZone": {
+        "type": "string",
+        "required": true
+      },
+      "yearsOfExperience": {
+        "type": "integer",
+        "required": true,
+        "max": 100,
+        "min": 0
+      },
+      "isOpenToMultiple": {
+        "type": "boolean",
+        "required": true
+      },
+      "certifications": {
+        "type": "relation",
+        "relation": "oneToMany",
+        "target": "api::certification.certification",
+        "mappedBy": "member"
+      },
+      "skills": {
+        "type": "relation",
+        "relation": "oneToMany",
+        "target": "api::skill.skill",
+        "mappedBy": "member"
+      },
+      "isAvailable": {
+        "type": "boolean",
+        "required": false,
+        "default": true
+      },
+      "lastName": {
+        "type": "string",
+        "required": true
+      },
+      "country": {
+        "type": "string",
+        "required": false
+      },
+      "otherGenderPreference": {
+        "type": "enumeration",
+        "enum": [
+          "woman",
+          "man",
+          "anotherGender",
+          "any"
+        ],
+        "required": true
+      },
+      "emails": {
+        "type": "relation",
+        "relation": "manyToMany",
+        "target": "api::email.email",
+        "inversedBy": "members"
+      },
+      "uniqueID": {
+        "type": "string",
+        "required": false,
+        "unique": true
+      }
+    }
+  }

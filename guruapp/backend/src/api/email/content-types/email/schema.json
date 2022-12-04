@@ -1,0 +1,39 @@
+{
+    "kind": "collectionType",
+    "collectionName": "emails",
+    "info": {
+      "singularName": "email",
+      "pluralName": "emails",
+      "displayName": "Email",
+      "description": ""
+    },
+    "options": {
+      "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+      "value": {
+        "type": "email",
+        "unique": true,
+        "required": true
+      },
+      "event": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::event.event",
+        "inversedBy": "emails"
+      },
+      "members": {
+        "type": "relation",
+        "relation": "manyToMany",
+        "target": "api::member.member",
+        "mappedBy": "emails"
+      },
+      "best_match": {
+        "type": "relation",
+        "relation": "manyToOne",
+        "target": "api::best-match.best-match",
+        "inversedBy": "emails"
+      }
+    }
+  }
