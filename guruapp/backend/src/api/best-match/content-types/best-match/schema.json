@@ -1,0 +1,53 @@
+{
+    "kind": "collectionType",
+    "collectionName": "best_matches",
+    "info": {
+      "singularName": "best-match",
+      "pluralName": "best-matches",
+      "displayName": "Best Match",
+      "description": ""
+    },
+    "options": {
+      "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+      "name": {
+        "type": "string",
+        "required": true
+      },
+      "companyName": {
+        "type": "string",
+        "required": false
+      },
+      "jobTitle": {
+        "type": "string",
+        "required": false
+      },
+      "timeZone": {
+        "type": "string",
+        "required": true
+      },
+      "certifications": {
+        "type": "relation",
+        "relation": "oneToMany",
+        "target": "api::certification.certification",
+        "mappedBy": "best_match"
+      },
+      "gender": {
+        "type": "enumeration",
+        "enum": [
+          "woman",
+          "man",
+          "anotherGender"
+        ],
+        "required": true
+      },
+      "emails": {
+        "type": "relation",
+        "relation": "oneToMany",
+        "target": "api::email.email",
+        "mappedBy": "best_match"
+      }
+    }
+  }

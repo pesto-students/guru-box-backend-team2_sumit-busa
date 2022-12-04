@@ -1,0 +1,31 @@
+{
+    "kind": "collectionType",
+    "collectionName": "top_results",
+    "info": {
+      "singularName": "top-result",
+      "pluralName": "top-results",
+      "displayName": "Top Result",
+      "description": ""
+    },
+    "options": {
+      "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+      "menteeUniqueID": {
+        "type": "string",
+        "required": true
+      },
+      "matches": {
+        "type": "json"
+      },
+      "menteeID": {
+        "type": "biginteger",
+        "required": true
+      },
+      "uniqueID": {
+        "type": "string",
+        "unique": true
+      }
+    }
+  }
